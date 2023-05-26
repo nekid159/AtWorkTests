@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class EmployerPage {
     public WebDriver driver;
@@ -74,6 +75,13 @@ public class EmployerPage {
     private WebElement test;
     @FindBy(xpath = "//*[@id=\"row\"]")
     private WebElement vacCardFull;
+    @FindBy(xpath = "//*[@id=\"cell\"]")
+    private WebElement vacCardShort;
+
+    @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[2]/div[3]/div[18]/button[1]")
+    private WebElement resetBtn;
+    @FindBy(xpath = "//p[contains(@class, 'filters__checkbox-item-text--type--gender')]")
+    public List<WebElement> gender;
 
 
     public void goAndClickApply() {
@@ -89,7 +97,6 @@ public class EmployerPage {
         jsExecutor.executeScript("window.scrollTo(0, arguments[0]);", middle);
         mscSearch.click();
         spbSearch.click();
-
     }
     public void goToAll() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -100,22 +107,25 @@ public class EmployerPage {
         }
         jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", test);
         allVac.click();
-
     }
     public void changeCardToFull() {
-        JavascriptExecutor jsExecutor2 = (JavascriptExecutor) driver;
-        jsExecutor2.executeScript("arguments[0].scrollIntoView({block: 'center'});", vacCardFull);
-
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", vacCardFull);
         vacCardFull.click();
     }
+    public void changeCardToShort() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", vacCardShort);
+        vacCardShort.click();
+    }
     public void goToExpNoExp(){
-        JavascriptExecutor jsExecutor3 = (JavascriptExecutor) driver;
-        jsExecutor3.executeScript("arguments[0].scrollIntoView({block: 'center'});", noExp);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", noExp);
         noExp.click();
     }
     public void goToExpThreeToSix(){
-        JavascriptExecutor jsExecutor3 = (JavascriptExecutor) driver;
-        jsExecutor3.executeScript("arguments[0].scrollIntoView({block: 'center'});", noExp);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", noExp);
         noExp.click();
         fromThreetoSix.click();
     }
@@ -125,6 +135,12 @@ public class EmployerPage {
         wait.until(ExpectedConditions.stalenessOf(parentElement.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li"))));
         wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(parentElement, By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[1]")));
     }
+    public void goToReset() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", resetBtn);
+        resetBtn.click();
+    }
+
 
 
 

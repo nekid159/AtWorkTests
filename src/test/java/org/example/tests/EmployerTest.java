@@ -37,7 +37,7 @@ public class EmployerTest {
         profilePage = new ProfilePage(driver);
         employerPage = new EmployerPage(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage")); }
 
     @Test
@@ -96,6 +96,28 @@ public class EmployerTest {
         firstCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li/div[2]/a/div[3]/p"));
         Assert.assertEquals("От 3 до 6 лет", firstCityCard.getText());
     }
+    @Test
+    public void test4_FiltersGender() {
+        employerPage.goToReset();
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", employerPage.gender.get(0));
+        employerPage.gender.get(0).click();
+        employerPage.changeCardToShort();
+        employerPage.goToAll();
+        employerPage.waitingForCardsLoaded();
+        employerPage.goToAll();
+        firstCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[1]/div[2]/a/div[2]/p/span[1]"));
+        secondCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[2]/div[2]/a/div[2]/p/span[1]"));
+        Assert.assertEquals("Мужчина", firstCityCard.getText());
+        Assert.assertEquals("Мужчина", secondCityCard.getText());
+        employerPage.gender.get(1).click();
+        employerPage.goToAll();
+        employerPage.waitingForCardsLoaded();
+        firstCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[1]/div[2]/a/div[2]/p/span[1]"));
+        secondCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[2]/div[2]/a/div[2]/p/span[1]"));
+        Assert.assertEquals("Женщина", firstCityCard.getText());
+        Assert.assertEquals("Женщина", secondCityCard.getText());
+    }
 
     @AfterClass
     public static void tearDown() {
@@ -103,7 +125,6 @@ public class EmployerTest {
       profilePage.changeToUser();
       profilePage.userLogout();
       driver.quit();
-
     }
 
 }
