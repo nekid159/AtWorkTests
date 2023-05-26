@@ -63,12 +63,9 @@ public class EmployerTest {
     }
     @Test
     public void test2_FiltersChangeCity() {
-
         employerPage.checkCity();
         employerPage.goToAll();
         employerPage.waitingForCardsLoaded();
-
-
         firstCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[1]/div[2]/a/p[@class='resume-card__user-region']"));
         secondCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[2]/div[2]/a/p[@class='resume-card__user-region']"));
         thirdCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[3]/div[2]/a/p[@class='resume-card__user-region']"));
@@ -83,13 +80,11 @@ public class EmployerTest {
         employerPage.changeCardToFull();
         employerPage.goToAll();
         employerPage.waitingForCardsLoaded();
-
         firstCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[1]/div[2]/a/div[3]/p"));
         secondCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[2]/div[2]/a/div[3]/p"));
         jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", firstCityCard);
         Assert.assertEquals("Нет опыта", firstCityCard.getText());
         Assert.assertEquals("Нет опыта", secondCityCard.getText());
-
         employerPage.goToExpThreeToSix();
         employerPage.goToAll();
         employerPage.waitingForCardsLoaded();
@@ -118,13 +113,32 @@ public class EmployerTest {
         Assert.assertEquals("Женщина", firstCityCard.getText());
         Assert.assertEquals("Женщина", secondCityCard.getText());
     }
+    @Test
+    public void test5_FiltersAge() {
+        int minValue = 20;
+        int maxValue = 40;
+        employerPage.goToReset();
+        employerPage.ageInput();
+        employerPage.goToAll();
+        employerPage.waitingForCardsLoaded();
+        firstCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[1]/div[2]/a/div[2]/p/span[2]"));
+        String ageToCheck = firstCityCard.getText();
+        String numbersOnly = ageToCheck.replaceAll("[^0-9]", "");
+        int result = Integer.parseInt(numbersOnly);
+        assert result >= minValue && result <= maxValue: "Не входит в диапазон";
+        secondCityCard = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[2]/div[2]/a/div[2]/p/span[2]"));
+        ageToCheck = secondCityCard.getText();
+        numbersOnly = ageToCheck.replaceAll("[^0-9]", "");
+        result = Integer.parseInt(numbersOnly);
+        assert result >= minValue && result <= maxValue: "Не входит в диапазон";
+    }
 
     @AfterClass
     public static void tearDown() {
-      profilePage.moveToMenu();
-      profilePage.changeToUser();
-      profilePage.userLogout();
-      driver.quit();
+     // profilePage.moveToMenu();
+    //  profilePage.changeToUser();
+     // profilePage.userLogout();
+     // driver.quit();
     }
 
 }

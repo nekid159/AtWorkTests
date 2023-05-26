@@ -9,17 +9,12 @@ public class LoginPage {
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver; }
-
     @FindBy(xpath = "//input[@id=\"email-input\"]")
     private WebElement loginField;
-
     @FindBy(xpath = "//button[contains(@class, 'authorization__button--continue')]")
     private WebElement loginBtn;
-
     @FindBy(xpath = "//button[contains(@class, 'authorization__button--enter')]")
     private WebElement enterBtn;
-
-
     @FindBy(xpath = "//input[@id=\"auth-password\"]")
     private WebElement passwdField;
 
@@ -28,7 +23,6 @@ public class LoginPage {
 
     public void inputPasswd(String passwd) {
         passwdField.sendKeys("Dd17549dd!"); }
-
     public void clickLoginBtn() {
         loginBtn.click(); }
     public void clickEnterBtn() {

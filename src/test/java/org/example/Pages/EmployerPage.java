@@ -23,22 +23,6 @@ public class EmployerPage {
     private WebElement allVac;
     @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[1]/div/div[1]/button[1]")
     private WebElement hotVac;
-    @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[2]/div[1]/h2")
-    private WebElement vacProfBtn;
-    @FindBy(xpath = "/html/body/div[1]/section[4]/div/ul/li[7]/div/p")
-    private WebElement vacProf1;
-    @FindBy(xpath = "/html/body/div[1]/section[4]/div/ul/li[13]/div/p")
-    private WebElement vacProf2;
-    @FindBy(xpath = "/html/body/div[1]/section[4]/div/div/button[3]")
-    private WebElement ProfToSpec;
-    @FindBy(xpath = "/html/body/div[1]/section[5]/div/ul/li[4]/div")
-    private WebElement vacSpec1;
-    @FindBy(xpath = "/html/body/div[1]/section[5]/div/ul/li[2]/div")
-    private WebElement vacSpec2;
-    @FindBy(xpath = "/html/body/div[1]/section[5]/div/div[2]/button[2]")
-    private WebElement searchSpec;
-    @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[2]/div[2]/div[3]/ul/li/p[1]")
-    private WebElement specValue;
     @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[2]/div[3]/div[1]/input")
     private WebElement nameInput;
     @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[2]/div[3]/div[3]/div[2]/ul/li[1]/p")
@@ -77,11 +61,16 @@ public class EmployerPage {
     private WebElement vacCardFull;
     @FindBy(xpath = "//*[@id=\"cell\"]")
     private WebElement vacCardShort;
-
     @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[2]/div[3]/div[18]/button[1]")
     private WebElement resetBtn;
     @FindBy(xpath = "//p[contains(@class, 'filters__checkbox-item-text--type--gender')]")
     public List<WebElement> gender;
+    @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[2]/div[3]/div[7]/div[2]/div/div/div[1]/input")
+    private WebElement ageFrom;
+    @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[2]/div[3]/div[7]/div[2]/div/div/div[2]/input")
+    private WebElement ageTo;
+
+
 
 
     public void goAndClickApply() {
@@ -139,6 +128,12 @@ public class EmployerPage {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", resetBtn);
         resetBtn.click();
+    }
+    public void ageInput() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", ageFrom);
+        ageFrom.sendKeys("20");
+        ageTo.sendKeys("40");
     }
 
 
