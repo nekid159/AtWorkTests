@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
 
@@ -49,7 +48,7 @@ public class EmployerPage {
     private WebElement mscSearch;
     @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[2]/div[3]/div[2]/div[2]/div/ul/li[2]/div")
     private WebElement spbSearch;
-    @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[1]")
+    @FindBy(xpath = "/html/body/div/main/div/section[4]/section[1]/section[1]/ul/li[1]/div[2]/a")
     public WebElement firstCard;
     @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[2]")
     public WebElement secondCard;
@@ -69,6 +68,14 @@ public class EmployerPage {
     private WebElement ageFrom;
     @FindBy(xpath = "/html/body/div[1]/main/div/section[4]/section[2]/div[3]/div[7]/div[2]/div/div/div[2]/input")
     private WebElement ageTo;
+    @FindBy(xpath = "//li[contains(@class, 'employment-type__item ')]")
+    public List<WebElement> employmentType;
+    @FindBy(xpath = "//li[contains(@class, 'schedule__item')]")
+    public List<WebElement> schedule;
+    @FindBy(xpath = "//li[contains(@class, 'work-format__item')]")
+    public List<WebElement> workFormat;
+    @FindBy(xpath = "//li[contains(@class, 'exceptions__item')]")
+    public List<WebElement> exceptions;
 
 
 
@@ -135,9 +142,27 @@ public class EmployerPage {
         ageFrom.sendKeys("20");
         ageTo.sendKeys("40");
     }
-
-
-
+    public void setFilters1() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        //WebElement rabotaybleat = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[2]/div[3]/div[10]/div[1]/h2"));
+        WebElement typeOfWork = driver.findElement(By.xpath("//h2[contains(@class, 'filters__title--type--schedule')]"));
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", typeOfWork);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        employmentType.get(0).click();
+        employmentType.get(1).click();
+        schedule.get(0).click();
+        schedule.get(2).click();
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", exceptions.get(1));
+        workFormat.get(0).click();
+        exceptions.get(1).click();
+    }
+    public void firstCardClick() {
+        firstCard.click();
+    }
 
 
 

@@ -3,6 +3,7 @@ import org.example.ConfProperties;
 import org.example.Pages.EmployerPage;
 import org.example.Pages.LoginPage;
 import org.example.Pages.ProfilePage;
+import org.example.Pages.ResumePage;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
@@ -20,9 +21,9 @@ public class EmployerTest {
     public static LoginPage loginPage;
     public static EmployerPage employerPage;
     public static ProfilePage profilePage;
+    public static ResumePage resumePage;
     public static WebDriver driver;
-    public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
-    public WebDriverWait waitAfter = new WebDriverWait(driver, Duration.ofSeconds(120));
+    public WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     public static WebElement firstCityCard;
     public static WebElement secondCityCard;
     public static WebElement thirdCityCard;
@@ -36,6 +37,7 @@ public class EmployerTest {
         loginPage = new LoginPage(driver);
         profilePage = new ProfilePage(driver);
         employerPage = new EmployerPage(driver);
+        resumePage = new ResumePage(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage")); }
@@ -131,6 +133,18 @@ public class EmployerTest {
         numbersOnly = ageToCheck.replaceAll("[^0-9]", "");
         result = Integer.parseInt(numbersOnly);
         assert result >= minValue && result <= maxValue: "Не входит в диапазон";
+    }
+    @Test
+    public void test6_Complex() {
+       // employerPage.goToReset();
+     //   employerPage.goToAll();
+      //  employerPage.waitingForCardsLoaded();
+        employerPage.setFilters1();
+        employerPage.goToAll();
+        employerPage.waitingForCardsLoaded();
+        employerPage.firstCardClick();
+
+
     }
 
     @AfterClass
