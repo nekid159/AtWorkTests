@@ -13,8 +13,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.Set;
+import java.util.ArrayList;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class EmployerTest {
@@ -136,23 +139,41 @@ public class EmployerTest {
     }
     @Test
     public void test6_Complex() {
-       // employerPage.goToReset();
-     //   employerPage.goToAll();
-      //  employerPage.waitingForCardsLoaded();
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
+
         employerPage.setFilters1();
         employerPage.goToAll();
-        employerPage.waitingForCardsLoaded();
+        WebElement parentElement = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul"));
+        wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(parentElement, By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul/li[1]")));
         employerPage.firstCardClick();
+        Set<String> windowHandles = driver.getWindowHandles();
+        List<String> windowHandlesList = new ArrayList<>(windowHandles);
+        driver.switchTo().window(windowHandlesList.get(1));
+        List<WebElement> empOptions = driver.findElements(By.xpath("//p[contains(@class, 'work-conditions__desc')]"));
+        Assert.assertTrue(empOptions.get(0).getText().contains("Полная занятость"));
+        Assert.assertTrue(empOptions.get(0).getText().contains("Частичная занятость"));
+        Assert.assertTrue(empOptions.get(1).getText().contains("Полный день"));
+        Assert.assertTrue(empOptions.get(1).getText().contains("Гибкий график"));
+        empOptions = driver.findElements(By.xpath("//p[contains(@class, 'section-wrapper__descr')]"));
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", empOptions.get(2));
+        Assert.assertEquals("Да", empOptions.get(2).getText());
+
+
+
+
+
+
 
 
     }
 
     @AfterClass
     public static void tearDown() {
-     // profilePage.moveToMenu();
-    //  profilePage.changeToUser();
-     // profilePage.userLogout();
-     // driver.quit();
+      profilePage.moveToMenu();
+      profilePage.changeToUser();
+      profilePage.userLogout();
+      driver.quit();
     }
 
 }

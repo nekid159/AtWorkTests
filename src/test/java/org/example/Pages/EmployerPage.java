@@ -144,7 +144,6 @@ public class EmployerPage {
     }
     public void setFilters1() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        //WebElement rabotaybleat = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[2]/div[3]/div[10]/div[1]/h2"));
         WebElement typeOfWork = driver.findElement(By.xpath("//h2[contains(@class, 'filters__title--type--schedule')]"));
         jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", typeOfWork);
         try {
