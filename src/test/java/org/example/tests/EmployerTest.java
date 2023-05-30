@@ -141,7 +141,6 @@ public class EmployerTest {
     public void test6_Complex() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
-
         employerPage.setFilters1();
         employerPage.goToAll();
         WebElement parentElement = driver.findElement(By.xpath("/html/body/div[1]/main/div/section[4]/section[1]/section[1]/ul"));
@@ -158,14 +157,6 @@ public class EmployerTest {
         empOptions = driver.findElements(By.xpath("//p[contains(@class, 'section-wrapper__descr')]"));
         jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", empOptions.get(2));
         Assert.assertEquals("Да", empOptions.get(2).getText());
-
-
-
-
-
-
-
-
     }
 
     @AfterClass
