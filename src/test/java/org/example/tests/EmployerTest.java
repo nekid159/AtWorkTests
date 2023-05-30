@@ -3,7 +3,7 @@ import org.example.ConfProperties;
 import org.example.Pages.EmployerPage;
 import org.example.Pages.LoginPage;
 import org.example.Pages.ProfilePage;
-import org.example.Pages.ResumePage;
+import org.example.Pages.Resume.ResumePage;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
@@ -15,7 +15,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Set;
 import java.util.ArrayList;
-
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;

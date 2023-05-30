@@ -1,4 +1,4 @@
-package org.example.Pages;
+package org.example.Pages.Resume;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
