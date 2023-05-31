@@ -25,6 +25,12 @@ public class MyFilesPage {
     private WebElement createRecommend;
     @FindBy(xpath = "/html/body/main/div/section[5]/div/div[1]/div[1]/ul/a[3]")
     private WebElement createTestTask;
+    @FindBy(xpath = "/html/body/main/div/section[5]/div/div[3]/div[2]/div[2]/div/div[2]/div")
+    public WebElement firstOffer;
+    @FindBy(xpath = "//button[contains(@class, 'open-preview')]")
+    public WebElement offerPreview;
+    @FindBy(xpath = "/html/body/main/div/section[5]/div/div[3]/div[2]/div[2]/div/div[2]/div/p")
+    public WebElement offerName;
     public void goToCreateOffer() {
         createFile.click();
         createOffer.click();
@@ -36,6 +42,13 @@ public class MyFilesPage {
     public void goToCreateTest() {
         createFile.click();
         createTestTask.click();
+    }
+    public void waitForOffersLoaded() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
+        wait.until(ExpectedConditions.elementToBeClickable(firstOffer));
+    }
+    public void openOfferPreview() {
+        offerPreview.click();
     }
 
 }

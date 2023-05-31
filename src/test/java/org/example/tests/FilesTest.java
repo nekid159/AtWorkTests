@@ -3,6 +3,7 @@ import org.example.ConfProperties;
 import org.example.Pages.*;
 import org.example.Pages.Files.MyFilesPage;
 import org.example.Pages.Files.OfferCreatePage;
+import org.example.Pages.Files.OfferPage;
 import org.example.Pages.Resume.ResumePage;
 import org.example.Pages.Vacanies.ArchieveVacancyPage;
 import org.example.Pages.Vacanies.MyVacanciesPage;
@@ -17,6 +18,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -34,6 +37,7 @@ public class FilesTest {
     public static OfferCreatePage offerCreatePage;
 
     public static MyFilesPage myFilesPage;
+    public static OfferPage offerPage;
     public static WebDriver driver;
     public static String vacancyToFileCheck;
 
@@ -50,12 +54,14 @@ public class FilesTest {
         myFilesPage = new MyFilesPage(driver);
         lkEmployer = new LkEmployer(driver);
         offerCreatePage = new OfferCreatePage(driver);
+        offerPage = new OfferPage(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage"));
     }
     @Test
     public void Test1_CreateOffer() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         loginPage.inputLogin(ConfProperties.getProperty("login"));
         loginPage.clickLoginBtn();
         loginPage.inputPasswd(ConfProperties.getProperty("password"));
@@ -76,11 +82,26 @@ public class FilesTest {
         lkEmployer.goToFiles();
         myFilesPage.goToCreateOffer();
         offerCreatePage.createOffer();
-
-
-
-
-
+        myFilesPage.waitForOffersLoaded();
+        Assert.assertEquals(vacancyToFileCheck, myFilesPage.offerName.getText());
+        myFilesPage.firstOffer.click();
+        myFilesPage.openOfferPreview();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals("Сергей Сергеевич", offerPage.candidateName.getText());
+        Assert.assertEquals("Грузчика", offerPage.vacancy.getText());
+        Assert.assertEquals("Главного грузчика", offerPage.vacancyBoss.getText());
+        //Assert.assertEquals("Грузить, грузить и ещё раз грузить", offerPage.vacancyDesc.getText());
+        Assert.assertEquals("12345", offerPage.salary.getText());
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", offerPage.companyName);
+        Assert.assertEquals("Игорь Игорьевич", offerPage.contactGuy.getText());
+        Assert.assertEquals("Главнейший грузчик", offerPage.post.getText());
+        Assert.assertEquals("СПЕЦМОНТАЖ 234", offerPage.companyName.getText());
+        Assert.assertEquals("gruzchik@mail.gruz", offerPage.contactEmail.getText());
+        Assert.assertEquals("+7(999)123-12-12", offerPage.contactNumber.getText());
     }
 
 }
