@@ -8,7 +8,6 @@ import java.util.List;
 
 public class OfferPage {
     public WebDriver driver;
-
     public OfferPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;

@@ -4,11 +4,10 @@ import org.example.Pages.*;
 import org.example.Pages.Files.MyFilesPage;
 import org.example.Pages.Files.OfferCreatePage;
 import org.example.Pages.Files.OfferPage;
-import org.example.Pages.Resume.ResumePage;
+import org.example.Pages.Files.RecommendCreatePage;
 import org.example.Pages.Vacanies.ArchieveVacancyPage;
 import org.example.Pages.Vacanies.MyVacanciesPage;
 import org.example.Pages.Vacanies.VacancyCreatePage;
-import org.example.Pages.Vacanies.VacancyPage;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
@@ -16,13 +15,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.Set;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.Dimension;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FilesTest {
@@ -35,7 +29,7 @@ public class FilesTest {
     public static ArchieveVacancyPage archieveVacancyPage;
     public static LkEmployer lkEmployer;
     public static OfferCreatePage offerCreatePage;
-
+    public static RecommendCreatePage recommendCreatePage;
     public static MyFilesPage myFilesPage;
     public static OfferPage offerPage;
     public static WebDriver driver;
@@ -55,7 +49,9 @@ public class FilesTest {
         lkEmployer = new LkEmployer(driver);
         offerCreatePage = new OfferCreatePage(driver);
         offerPage = new OfferPage(driver);
-        driver.manage().window().maximize();
+        recommendCreatePage = new RecommendCreatePage(driver);
+        Dimension size = new Dimension(2500, 1800);
+        driver.manage().window().setSize(size);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage"));
     }
@@ -102,6 +98,13 @@ public class FilesTest {
         Assert.assertEquals("СПЕЦМОНТАЖ 234", offerPage.companyName.getText());
         Assert.assertEquals("gruzchik@mail.gruz", offerPage.contactEmail.getText());
         Assert.assertEquals("+7(999)123-12-12", offerPage.contactNumber.getText());
+    }
+    @Test
+    public void Test2_CreateRecommend() {
+        lkEmployer.goToFiles();
+        myFilesPage.goToCreateRecommend();
+        recommendCreatePage.CreatingRecommendationLetter();
+
     }
 
 }
