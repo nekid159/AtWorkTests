@@ -14,7 +14,6 @@ import java.util.List;
 
 public class OfferCreatePage {
     public WebDriver driver;
-
     public OfferCreatePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;

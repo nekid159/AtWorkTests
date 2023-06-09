@@ -17,6 +17,12 @@ public class MyFilesPage {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
+    @FindBy(xpath = "//button[contains(@data-id, 'job-offer-page')]")
+    private WebElement jobOfferPage;
+    @FindBy(xpath = "//button[contains(@data-id, 'recommendation-letters-page')]")
+    private WebElement recommendationLetterPage;
+    @FindBy(xpath = "//button[contains(@data-id, 'test-tasks-page')]")
+    private WebElement testTaskPage;
     @FindBy(xpath = "//button[contains(@class, 'create_a_new_letter')]")
     private WebElement createFile;
     @FindBy(xpath = "/html/body/main/div/section[5]/div/div[1]/div[1]/ul/a[1]")
@@ -35,7 +41,7 @@ public class MyFilesPage {
         createFile.click();
         createOffer.click();
     }
-    public void goToCreateReccomend() {
+    public void goToCreateRecommend() {
         createFile.click();
         createRecommend.click();
     }
