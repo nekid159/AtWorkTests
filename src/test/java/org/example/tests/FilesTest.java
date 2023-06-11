@@ -1,10 +1,7 @@
 package org.example.tests;
 import org.example.ConfProperties;
 import org.example.Pages.*;
-import org.example.Pages.Files.MyFilesPage;
-import org.example.Pages.Files.OfferCreatePage;
-import org.example.Pages.Files.OfferPage;
-import org.example.Pages.Files.RecommendCreatePage;
+import org.example.Pages.Files.*;
 import org.example.Pages.Vacanies.ArchieveVacancyPage;
 import org.example.Pages.Vacanies.MyVacanciesPage;
 import org.example.Pages.Vacanies.VacancyCreatePage;
@@ -30,6 +27,7 @@ public class FilesTest {
     public static LkEmployer lkEmployer;
     public static OfferCreatePage offerCreatePage;
     public static RecommendCreatePage recommendCreatePage;
+    public static TestTaskCreatePage testTaskCreatePage;
     public static MyFilesPage myFilesPage;
     public static OfferPage offerPage;
     public static WebDriver driver;
@@ -50,6 +48,7 @@ public class FilesTest {
         offerCreatePage = new OfferCreatePage(driver);
         offerPage = new OfferPage(driver);
         recommendCreatePage = new RecommendCreatePage(driver);
+        testTaskCreatePage = new TestTaskCreatePage(driver);
         Dimension size = new Dimension(2500, 1800);
         driver.manage().window().setSize(size);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
