@@ -49,8 +49,7 @@ public class FilesTest {
         offerPage = new OfferPage(driver);
         recommendCreatePage = new RecommendCreatePage(driver);
         testTaskCreatePage = new TestTaskCreatePage(driver);
-        Dimension size = new Dimension(2500, 1800);
-        driver.manage().window().setSize(size);
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage"));
     }
@@ -80,7 +79,7 @@ public class FilesTest {
         myFilesPage.waitForOffersLoaded();
         Assert.assertEquals(vacancyToFileCheck, myFilesPage.offerName.getText());
         myFilesPage.firstOffer.click();
-        myFilesPage.openOfferPreview();
+        myFilesPage.filePreview.get(0).click();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -103,6 +102,10 @@ public class FilesTest {
         lkEmployer.goToFiles();
         myFilesPage.goToCreateRecommend();
         recommendCreatePage.CreatingRecommendationLetter();
+        myFilesPage.recommendationLetterPage.click();
+
+        myFilesPage.filePreview.get(1).click();
+        Assert.assertEquals("Петров Пётр Петрович", offerPage.candidateName.getText());
 
     }
 

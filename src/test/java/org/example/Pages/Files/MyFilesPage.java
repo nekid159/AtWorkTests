@@ -20,9 +20,9 @@ public class MyFilesPage {
     @FindBy(xpath = "//button[contains(@data-id, 'job-offer-page')]")
     private WebElement jobOfferPage;
     @FindBy(xpath = "//button[contains(@data-id, 'recommendation-letters-page')]")
-    private WebElement recommendationLetterPage;
+    public WebElement recommendationLetterPage;
     @FindBy(xpath = "//button[contains(@data-id, 'test-tasks-page')]")
-    private WebElement testTaskPage;
+    public WebElement testTaskPage;
     @FindBy(xpath = "//button[contains(@class, 'create_a_new_letter')]")
     private WebElement createFile;
     @FindBy(xpath = "/html/body/main/div/section[5]/div/div[1]/div[1]/ul/a[1]")
@@ -34,7 +34,7 @@ public class MyFilesPage {
     @FindBy(xpath = "/html/body/main/div/section[5]/div/div[3]/div[2]/div[2]/div/div[2]/div")
     public WebElement firstOffer;
     @FindBy(xpath = "//button[contains(@class, 'open-preview')]")
-    public WebElement offerPreview;
+    public List<WebElement> filePreview;
     @FindBy(xpath = "/html/body/main/div/section[5]/div/div[3]/div[2]/div[2]/div/div[2]/div/p")
     public WebElement offerName;
     public void goToCreateOffer() {
@@ -53,8 +53,6 @@ public class MyFilesPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
         wait.until(ExpectedConditions.elementToBeClickable(firstOffer));
     }
-    public void openOfferPreview() {
-        offerPreview.click();
-    }
+
 
 }

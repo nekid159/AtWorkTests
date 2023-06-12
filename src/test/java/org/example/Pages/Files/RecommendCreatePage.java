@@ -23,6 +23,10 @@ public class RecommendCreatePage {
     private WebElement periodFrom;
     @FindBy(xpath = "//input[contains(@name, 'period__to')]")
     private WebElement periodTo;
+    @FindBy(xpath = "/html/body/div/div[2]/div/div[2]/div/span[5]")
+    private WebElement periodFromDate;
+    @FindBy(xpath = "/html/body/div/div[2]/div/div[2]/div/span[12]")
+    private WebElement periodToDate;
     @FindBy(xpath = "//input[contains(@name, 'recommending-post')]")
     private WebElement postWhoRecommends;
     @FindBy(xpath = "//input[contains(@name, 'recommending-name')]")
@@ -36,9 +40,12 @@ public class RecommendCreatePage {
         nameToRecommend.sendKeys("Петров Пётр Петрович");
         post.sendKeys("Менеджер");
         periodFrom.click();
-        periodFrom.sendKeys("20.03.2017");
+        periodFromDate.click();
+        String periodFromDateToCheck = periodFrom.getText();
         periodTo.click();
-        periodTo.sendKeys("15.07.2020");
+        periodToDate.click();
+        String periodToDateToCheck = periodFrom.getText();
+        post.click();
         nextBtn.get(0).click();
         nextBtn.get(1).click();
         postWhoRecommends.sendKeys("Главный менеджер");
