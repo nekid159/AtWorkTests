@@ -30,6 +30,8 @@ public class FilesTest {
     public static TestTaskCreatePage testTaskCreatePage;
     public static MyFilesPage myFilesPage;
     public static OfferPage offerPage;
+    public static RecommendPage recommendPage;
+    public static TestTaskPage testTaskPage;
     public static WebDriver driver;
     public static String vacancyToFileCheck;
 
@@ -49,6 +51,8 @@ public class FilesTest {
         offerPage = new OfferPage(driver);
         recommendCreatePage = new RecommendCreatePage(driver);
         testTaskCreatePage = new TestTaskCreatePage(driver);
+        recommendPage = new RecommendPage(driver);
+        testTaskPage = new TestTaskPage(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage"));
@@ -97,16 +101,43 @@ public class FilesTest {
         Assert.assertEquals("gruzchik@mail.gruz", offerPage.contactEmail.getText());
         Assert.assertEquals("+7(999)123-12-12", offerPage.contactNumber.getText());
     }
+
     @Test
     public void Test2_CreateRecommend() {
         lkEmployer.goToFiles();
         myFilesPage.goToCreateRecommend();
         recommendCreatePage.CreatingRecommendationLetter();
         myFilesPage.recommendationLetterPage.click();
-
         myFilesPage.filePreview.get(1).click();
-        Assert.assertEquals("Петров Пётр Петрович", offerPage.candidateName.getText());
-
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals("Петров Пётр Петрович", recommendPage.recommendedName.get(1).getText());
+        Assert.assertEquals("Менеджер", recommendPage.recommendedPost.getText());
+        Assert.assertEquals("Главный менеджер", recommendPage.postWhoRecommends.getText());
+        Assert.assertEquals("Олегов Олег Олегович", recommendPage.nameWhoRecommends.getText());
     }
+    @Test
+    public void Test3_CreateTestTask() {
+        lkEmployer.goToFiles();
+        myFilesPage.goToCreateTest();
+        testTaskCreatePage.CreatingTestTask();
+        myFilesPage.testTaskPage.click();
+        myFilesPage.filePreview.get(2).click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals("Придётся много тестировать", testTaskPage.description.getAttribute("value"));
+        Assert.assertEquals("https://www.google.ru", testTaskPage.link.getText());
+        Assert.assertEquals("pdf", testTaskPage.format.getText());
+        Assert.assertEquals(testTaskCreatePage.outputFormat, testTaskPage.date.getText());
+    }
+
+
+
 
 }
