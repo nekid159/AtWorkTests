@@ -35,7 +35,7 @@ public class TestTaskCreatePage {
     @FindBy(xpath = "/html/body/div/div[2]/div/div[2]/div/span[26]")
     private WebElement dateChoose;
     @FindBy(xpath = "//button[contains(@class, 'save')]")
-    private List<WebElement> saveTest;
+    private List<WebElement> saveBtn;
 
     public void CreatingTestTask() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -57,12 +57,11 @@ public class TestTaskCreatePage {
         try {
             Date date = inputFormat.parse(dateToCheck);
             outputDate = outputFormat.format(date);
-            System.out.println(outputDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", saveTest.get(1));
-        saveTest.get(1).click();
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", saveBtn.get(1));
+        saveBtn.get(1).click();
     }
     public String getOutputDate() {
         return outputDate;

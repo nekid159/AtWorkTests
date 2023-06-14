@@ -1,10 +1,9 @@
 package org.example.Pages.Files;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
@@ -37,6 +36,10 @@ public class MyFilesPage {
     public List<WebElement> filePreview;
     @FindBy(xpath = "/html/body/main/div/section[5]/div/div[3]/div[2]/div[2]/div/div[2]/div/p")
     public WebElement offerName;
+    @FindBy(xpath = "//button[contains(@class, 'letter__item-delete')]")
+    public List<WebElement> fileDelete;
+    @FindBy(xpath = "//button[contains(@class, 'delete')]")
+    public List<WebElement> confirmDelete;
     public void goToCreateOffer() {
         createFile.click();
         createOffer.click();
@@ -52,6 +55,17 @@ public class MyFilesPage {
     public void waitForOffersLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
         wait.until(ExpectedConditions.elementToBeClickable(firstOffer));
+    }
+    public void deletingFiles() {
+        testTaskPage.click();
+        fileDelete.get(2).click();
+        confirmDelete.get(3).click();
+        recommendationLetterPage.click();
+        fileDelete.get(1).click();
+        confirmDelete.get(2).click();
+        jobOfferPage.click();
+        fileDelete.get(0).click();
+        confirmDelete.get(1).click();
     }
 
 

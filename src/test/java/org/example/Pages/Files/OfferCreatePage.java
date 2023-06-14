@@ -1,15 +1,9 @@
 package org.example.Pages.Files;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.lang.module.ModuleDescriptor;
-import java.time.Duration;
 import java.util.List;
 
 public class OfferCreatePage {

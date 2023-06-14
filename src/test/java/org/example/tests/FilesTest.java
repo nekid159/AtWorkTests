@@ -32,6 +32,7 @@ public class FilesTest {
     public static OfferPage offerPage;
     public static RecommendPage recommendPage;
     public static TestTaskPage testTaskPage;
+    public static OfferArchieve offerArchieve;
     public static WebDriver driver;
     public static String vacancyToFileCheck;
 
@@ -53,6 +54,7 @@ public class FilesTest {
         testTaskCreatePage = new TestTaskCreatePage(driver);
         recommendPage = new RecommendPage(driver);
         testTaskPage = new TestTaskPage(driver);
+        offerArchieve = new OfferArchieve(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage"));
@@ -135,8 +137,30 @@ public class FilesTest {
         Assert.assertEquals("https://www.google.ru", testTaskPage.link.getText());
         Assert.assertEquals("pdf", testTaskPage.format.getText());
         String outputDate = testTaskCreatePage.getOutputDate();
-        System.out.println(outputDate);
         Assert.assertEquals(outputDate, testTaskPage.date.getText());
+    }
+    @Test
+    public void Test4_DeleteFiles() {
+        lkEmployer.goToFiles();
+        myFilesPage.deletingFiles();
+        driver.get("https://at-work.pro/user/employer/archive/");
+        archievePage.GotoArchieveFiles();
+        Assert.assertEquals("Тестировщик", archievePage.lastOfferName.getText());
+        archievePage.GoToArcieveRecommends();
+        Assert.assertEquals("Петров Пётр Петрович", archievePage.lastRecommendName.getText());
+        archievePage.GoToArcieveTestTasks();
+        Assert.assertEquals("Тестировщик", archievePage.lastTestTaskName.getText());
+    }
+    @Test
+    public void Test5_ArchieveFilesCheck() {
+        archievePage.GoToArcieveOffers();
+        archievePage.lastOffer.click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        offerArchieve.CheckOfferArchieve();
     }
 
 }
