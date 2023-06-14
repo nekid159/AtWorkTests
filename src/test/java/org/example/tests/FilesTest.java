@@ -18,7 +18,6 @@ import org.openqa.selenium.Dimension;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FilesTest {
     public static LoginPage loginPage;
-    public static EmployerPage employerPage;
     public static ProfilePage profilePage;
     public static MyVacanciesPage myVacanciesPage;
     public static VacancyCreatePage vacancyCreatePage;
@@ -33,6 +32,8 @@ public class FilesTest {
     public static RecommendPage recommendPage;
     public static TestTaskPage testTaskPage;
     public static OfferArchieve offerArchieve;
+    public static RecommendArchieve recommendArchieve;
+    public static TestTaskArchieve testTaskArchieve;
     public static WebDriver driver;
     public static String vacancyToFileCheck;
 
@@ -55,6 +56,8 @@ public class FilesTest {
         recommendPage = new RecommendPage(driver);
         testTaskPage = new TestTaskPage(driver);
         offerArchieve = new OfferArchieve(driver);
+        recommendArchieve = new RecommendArchieve(driver);
+        testTaskArchieve = new TestTaskArchieve(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage"));
@@ -155,12 +158,17 @@ public class FilesTest {
     public void Test5_ArchieveFilesCheck() {
         archievePage.GoToArcieveOffers();
         archievePage.lastOffer.click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        archievePage.WaitToFilesLoad();
         offerArchieve.CheckOfferArchieve();
+        archievePage.goBackArchieve();
+        archievePage.GoToArcieveRecommends();
+        archievePage.lastRecommend.click();
+        archievePage.WaitToFilesLoad();
+        recommendArchieve.CheckRecommendArchieve();
+        archievePage.goBackArchieve2();
+        archievePage.GoToArcieveTestTasks();
+        archievePage.lastTestTask.click();
+        archievePage.WaitToFilesLoad();
     }
 
 }

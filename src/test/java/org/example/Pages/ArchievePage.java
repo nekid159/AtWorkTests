@@ -1,4 +1,5 @@
 package org.example.Pages;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +34,10 @@ public class ArchievePage {
     public WebElement lastRecommend;
     @FindBy(xpath = "/html/body/main/div/section[5]/section[2]/section[4]/ul/li[1]")
     public WebElement lastTestTask;
+    @FindBy(xpath = "/html/body/main/div/div[1]/div[1]/span")
+    public WebElement goBackToFilesArchieve;
+    @FindBy(xpath = "/html/body/main/div/section[6]/div[1]/button")
+    public WebElement goBackToFilesArchieve2;
 
 
     public void GoToArchieveVacancy() {
@@ -49,6 +54,23 @@ public class ArchievePage {
     }
     public void GoToArcieveTestTasks() {
         archieveFiles.get(2).click();
+    }
+    public void WaitToFilesLoad() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void goBackArchieve() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", goBackToFilesArchieve);
+        goBackToFilesArchieve.click();
+    }
+    public void goBackArchieve2() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", goBackToFilesArchieve2);
+        goBackToFilesArchieve2.click();
     }
 
 
