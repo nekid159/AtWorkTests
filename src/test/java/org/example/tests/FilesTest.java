@@ -134,10 +134,9 @@ public class FilesTest {
         Assert.assertEquals("Придётся много тестировать", testTaskPage.description.getAttribute("value"));
         Assert.assertEquals("https://www.google.ru", testTaskPage.link.getText());
         Assert.assertEquals("pdf", testTaskPage.format.getText());
-        Assert.assertEquals(testTaskCreatePage.outputFormat, testTaskPage.date.getText());
+        String outputDate = testTaskCreatePage.getOutputDate();
+        System.out.println(outputDate);
+        Assert.assertEquals(outputDate, testTaskPage.date.getText());
     }
-
-
-
 
 }

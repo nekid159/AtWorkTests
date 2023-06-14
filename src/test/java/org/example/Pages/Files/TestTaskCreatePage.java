@@ -14,6 +14,7 @@ import java.util.Locale;
 public class TestTaskCreatePage {
     public WebDriver driver;
     public SimpleDateFormat outputFormat;
+    private String outputDate;
     public TestTaskCreatePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -55,13 +56,16 @@ public class TestTaskCreatePage {
         // SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy", new Locale("ru"));
         try {
             Date date = inputFormat.parse(dateToCheck);
-            String outputDate = outputFormat.format(date);
+            outputDate = outputFormat.format(date);
             System.out.println(outputDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", saveTest.get(1));
         saveTest.get(1).click();
+    }
+    public String getOutputDate() {
+        return outputDate;
     }
 
 }
