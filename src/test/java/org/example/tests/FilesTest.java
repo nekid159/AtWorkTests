@@ -169,6 +169,10 @@ public class FilesTest {
         archievePage.GoToArcieveTestTasks();
         archievePage.lastTestTask.click();
         archievePage.WaitToFilesLoad();
+        testTaskArchieve.CheckTestTask();
+        String checkDate = testTaskCreatePage.getOutputDate();
+        System.out.println(checkDate);
+        Assert.assertEquals(checkDate, testTaskArchieve.date.getText());
     }
 
 }

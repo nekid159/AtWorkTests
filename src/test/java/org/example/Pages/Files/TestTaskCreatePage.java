@@ -14,7 +14,7 @@ import java.util.Locale;
 public class TestTaskCreatePage {
     public WebDriver driver;
     public SimpleDateFormat outputFormat;
-    private String outputDate;
+    public String outputDate;
     public TestTaskCreatePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
