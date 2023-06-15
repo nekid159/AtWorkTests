@@ -13,7 +13,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.Dimension;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FilesTest {
@@ -173,6 +172,12 @@ public class FilesTest {
         String checkDate = testTaskCreatePage.getOutputDate();
         System.out.println(checkDate);
         Assert.assertEquals(checkDate, testTaskArchieve.date.getText());
+    }
+    @Test
+    public void Test6_GetFilesBack() {
+        driver.get("https://at-work.pro/user/employer/archive/");
+        archievePage.GotoArchieveFiles();
+        archievePage.DuplicateFiles();
     }
 
 }

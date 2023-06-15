@@ -30,6 +30,26 @@ public class ArchievePage {
     public WebElement lastTestTaskName;
     @FindBy(xpath = "/html/body/main/div/section[5]/section[2]/section[2]/ul/li[1]/div[1]/p[1]")
     public WebElement lastOffer;
+    @FindBy(xpath = "/html/body/main/div/section[5]/section[2]/section[2]/ul/li[1]/div[2]/div[1]")
+    public WebElement lastOfferMenu;
+    @FindBy(xpath = "/html/body/main/div/section[5]/section[2]/section[3]/ul/li[1]/div/div[1]")
+    public WebElement lastRecommendMenu;
+    @FindBy(xpath = "/html/body/main/div/section[5]/section[2]/section[4]/ul/li[1]/div/div[1]")
+    public WebElement lastTestTaskMenu;
+    @FindBy(xpath = "/html/body/main/div/section[5]/section[2]/section[4]/ul/li[1]/div/div[2]/div/ul/li/p")
+    public WebElement lastTestTaskDuplicate;
+    @FindBy(xpath = "/html/body/main/div/section[8]/div/div[3]/button[2]")
+    public WebElement testTaskConfirmDuplicate;
+    @FindBy(xpath = "/html/body/main/div/section[8]/div/div[2]/div[1]/ul/li/div")
+    public WebElement testTaskDuplicateVacancy;
+    @FindBy(xpath = "/html/body/main/div/section[5]/section[2]/section[3]/ul/li[1]/div/div[2]/div/ul/li/p")
+    public WebElement lastRecommendDuplicate;
+    @FindBy(xpath = "/html/body/main/div/section[5]/section[2]/section[2]/ul/li[1]/div[2]/div[2]/div/ul/li/p")
+    public WebElement lastOfferDuplicate;
+    @FindBy(xpath = "/html/body/main/div/section[8]/div/div[2]/div[1]/ul/li/div/div")
+    public WebElement offerDuplicateVacancy;
+    @FindBy(xpath = "/html/body/main/div/section[8]/div/div[3]/button[2]")
+    public WebElement offerConfirmDuplicate;
     @FindBy(xpath = "/html/body/main/div/section[5]/section[2]/section[3]/ul/li[1]/a")
     public WebElement lastRecommend;
     @FindBy(xpath = "/html/body/main/div/section[5]/section[2]/section[4]/ul/li[1]")
@@ -72,6 +92,41 @@ public class ArchievePage {
         jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", goBackToFilesArchieve2);
         goBackToFilesArchieve2.click();
     }
+    public void DuplicateFiles() {
+        GoToArcieveOffers();
+        lastOfferMenu.click();
+        lastOfferDuplicate.click();
+        offerDuplicateVacancy.click();
+        offerConfirmDuplicate.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        GoToArcieveRecommends();
+        lastRecommendMenu.click();
+        lastRecommendDuplicate.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        GoToArcieveTestTasks();
+        lastTestTaskMenu.click();
+        System.out.println(lastTestTaskDuplicate.getText());
+        System.out.println(testTaskDuplicateVacancy.getText());
+        System.out.println(testTaskConfirmDuplicate.getText());
+        lastTestTaskDuplicate.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        testTaskDuplicateVacancy.click();
+        testTaskConfirmDuplicate.click();
+
+    }
+
 
 
 
