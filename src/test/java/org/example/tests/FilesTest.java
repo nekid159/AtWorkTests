@@ -179,5 +179,4 @@ public class FilesTest {
         archievePage.GotoArchieveFiles();
         archievePage.DuplicateFiles();
     }
-
 }
