@@ -12,6 +12,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -61,6 +65,7 @@ public class FilesTest {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage"));
     }
+
     @Test
     public void Test1_CreateOffer() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -123,6 +128,7 @@ public class FilesTest {
         Assert.assertEquals("Главный менеджер", recommendPage.postWhoRecommends.getText());
         Assert.assertEquals("Олегов Олег Олегович", recommendPage.nameWhoRecommends.getText());
     }
+
     @Test
     public void Test3_CreateTestTask() {
         lkEmployer.goToFiles();
@@ -141,6 +147,7 @@ public class FilesTest {
         String outputDate = testTaskCreatePage.getOutputDate();
         Assert.assertEquals(outputDate, testTaskPage.date.getText());
     }
+
     @Test
     public void Test4_DeleteFiles() {
         lkEmployer.goToFiles();
@@ -153,6 +160,7 @@ public class FilesTest {
         archievePage.GoToArcieveTestTasks();
         Assert.assertEquals("Тестировщик", archievePage.lastTestTaskName.getText());
     }
+
     @Test
     public void Test5_ArchieveFilesCheck() {
         archievePage.GoToArcieveOffers();
@@ -173,6 +181,7 @@ public class FilesTest {
         System.out.println(checkDate);
         Assert.assertEquals(checkDate, testTaskArchieve.date.getText());
     }
+
     @Test
     public void Test6_GetFilesBack() {
         driver.get("https://at-work.pro/user/employer/archive/");
@@ -180,8 +189,31 @@ public class FilesTest {
         archievePage.DuplicateFiles();
         myFilesPage.checkFilesAfterDelete();
     }
+
     @Test
     public void Test7_DeleteFilesWithVacancy() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        lkEmployer.goToVacancies();
+        myVacanciesPage.sendVacToArchive();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/main/div/section[5]/section[1]/div/a[1]")));
+        lkEmployer.goToFiles();
+        myFilesPage.checkFilesAfterDeleteWithVacancy();
+        myFilesPage.recommendationLetterPage.click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        myFilesPage.fileDelete.get(0).click();
+        myFilesPage.confirmDelete.get(1).click();
 
+    }
+
+    @AfterClass
+    public static void tearDown() {
+        profilePage.moveToMenu();
+        profilePage.changeToUser();
+        profilePage.userLogout();
+        driver.quit();
     }
 }

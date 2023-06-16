@@ -13,12 +13,16 @@ public class LkEmployer {
     }
     @FindBy(xpath = "/html/body/main/div/section[1]/div[2]/ul[1]/a[3]")
     private WebElement files;
+    @FindBy(xpath = "/html/body/main/div/section[1]/div[2]/ul[1]/a[1]/span[1]")
+    private WebElement vacancies;
     public void goToFiles() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", files);
         files.click();
     }
     public void goToVacancies() {
-
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", vacancies);
+        vacancies.click();
     }
 }

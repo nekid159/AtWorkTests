@@ -49,6 +49,10 @@ public class MyFilesPage {
     public List<WebElement> fileDelete;
     @FindBy(xpath = "//button[contains(@class, 'delete')]")
     public List<WebElement> confirmDelete;
+    @FindBy(xpath = "/html/body/main/div/section[5]/div/div[3]/div[2]/div[1]/h6")
+    public WebElement offerPass;
+    @FindBy(xpath = "/html/body/main/div/section[5]/div/div[3]/div[4]/div[1]/h6")
+    public WebElement testTaskPass;
     public void goToCreateOffer() {
         createFile.click();
         createOffer.click();
@@ -101,6 +105,29 @@ public class MyFilesPage {
             throw new RuntimeException(e);
         }
         Assert.assertEquals("Тестировщик", myFilesPage.testTaskName.getText());
+    }
+    public void checkFilesAfterDeleteWithVacancy() {
+        myFilesPage.jobOfferPage.click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals("Пока нет созданных", myFilesPage.offerPass.getText());
+        myFilesPage.recommendationLetterPage.click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals("Петров Пётр Петрович", myFilesPage.recommendName.getText());
+        myFilesPage.testTaskPage.click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals("Пока нет созданных", myFilesPage.testTaskPass.getText());
     }
 
 

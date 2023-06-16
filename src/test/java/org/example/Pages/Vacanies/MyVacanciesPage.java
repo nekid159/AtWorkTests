@@ -39,6 +39,7 @@ public class MyVacanciesPage {
     public WebElement sendVac;
 
 
+
     public void clickVacCreateBtn() {
         vacCreateBtn.click(); }
 
