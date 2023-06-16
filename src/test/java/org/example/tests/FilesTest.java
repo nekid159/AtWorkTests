@@ -178,5 +178,10 @@ public class FilesTest {
         driver.get("https://at-work.pro/user/employer/archive/");
         archievePage.GotoArchieveFiles();
         archievePage.DuplicateFiles();
+        myFilesPage.checkFilesAfterDelete();
+    }
+    @Test
+    public void Test7_DeleteFilesWithVacancy() {
+
     }
 }

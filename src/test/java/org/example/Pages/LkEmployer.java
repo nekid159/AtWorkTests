@@ -18,4 +18,7 @@ public class LkEmployer {
         jsExecutor.executeScript("arguments[0].scrollIntoView({block: 'center'});", files);
         files.click();
     }
+    public void goToVacancies() {
+
+    }
 }

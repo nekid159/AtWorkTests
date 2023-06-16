@@ -1,5 +1,7 @@
 package org.example.Pages.Files;
 
+import org.example.Pages.LkEmployer;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,13 +13,15 @@ import java.util.List;
 
 public class MyFilesPage {
     public WebDriver driver;
+    public static LkEmployer lkEmployer;
+    public static MyFilesPage myFilesPage;
 
     public MyFilesPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
     @FindBy(xpath = "//button[contains(@data-id, 'job-offer-page')]")
-    private WebElement jobOfferPage;
+    public WebElement jobOfferPage;
     @FindBy(xpath = "//button[contains(@data-id, 'recommendation-letters-page')]")
     public WebElement recommendationLetterPage;
     @FindBy(xpath = "//button[contains(@data-id, 'test-tasks-page')]")
@@ -36,6 +40,11 @@ public class MyFilesPage {
     public List<WebElement> filePreview;
     @FindBy(xpath = "/html/body/main/div/section[5]/div/div[3]/div[2]/div[2]/div/div[2]/div/p")
     public WebElement offerName;
+    @FindBy(xpath = "/html/body/main/div/section[5]/div/div[3]/div[3]/div[2]/div/div[2]/div/p")
+    public WebElement recommendName;
+    @FindBy(xpath = "/html/body/main/div/section[5]/div/div[3]/div[4]/div[2]/div/div[2]/div/p")
+    public WebElement testTaskName;
+
     @FindBy(xpath = "//button[contains(@class, 'letter__item-delete')]")
     public List<WebElement> fileDelete;
     @FindBy(xpath = "//button[contains(@class, 'delete')]")
@@ -66,6 +75,32 @@ public class MyFilesPage {
         jobOfferPage.click();
         fileDelete.get(0).click();
         confirmDelete.get(1).click();
+    }
+    public void checkFilesAfterDelete() {
+        lkEmployer = new LkEmployer(driver);
+        myFilesPage = new MyFilesPage(driver);
+        lkEmployer.goToFiles();
+        myFilesPage.jobOfferPage.click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals("Тестировщик", myFilesPage.offerName.getText());
+        myFilesPage.recommendationLetterPage.click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals("Петров Пётр Петрович", myFilesPage.recommendName.getText());
+        myFilesPage.testTaskPage.click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        Assert.assertEquals("Тестировщик", myFilesPage.testTaskName.getText());
     }
 
 
