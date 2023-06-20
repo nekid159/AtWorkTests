@@ -29,13 +29,9 @@ public class LoginTest {
 
     @Test
     public void loginTest() {
-        loginPage.inputLogin(ConfProperties.getProperty("login"));
-        loginPage.clickLoginBtn();
-        loginPage.inputPasswd(ConfProperties.getProperty("password"));
-        loginPage.clickEnterBtn();
+        loginPage.mailEnter();
         profilePage.moveToMenu();
         String user = profilePage.getUserID();
-
         Assert.assertEquals("ID: 976261", user);
         }
 

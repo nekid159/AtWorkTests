@@ -30,55 +30,24 @@ public class CompanyEditTest {
     public void test1_companyEdit() {
         companyPage = new CompanyPage(driver);
         companyEditPage = new CompanyEditPage(driver);
-
-        loginPage.inputLogin(ConfProperties.getProperty("login"));
-        loginPage.clickLoginBtn();
-        loginPage.inputPasswd(ConfProperties.getProperty("password"));
-        loginPage.clickEnterBtn();
-
+        loginPage.mailEnter();
         profilePage.moveToMenu();
         profilePage.changeToCompany();
         driver.get("https://at-work.pro/user");
-
         companyPage.clickCompContrib();
         companyPage.goToCompMenu();
         companyPage.goToCompEdit();
-
-        companyEditPage.nextPageCompany();
-        companyEditPage.descriptionEdit();
-        companyEditPage.siteEdit();
-        companyEditPage.specializationChoose();
-        companyEditPage.numberChoose();
-        companyEditPage.textAreaEdit();
-        companyEditPage.nextPageAgain();
-        companyEditPage.submitCompany();
-
+        companyEditPage.editCompany();
         companyPage.waitingForLoad();
         companyPage.gettingNumber();
-
-
-        Assert.assertEquals("Автомобильный бизнес", companyPage.compSpec.getText());
-        Assert.assertEquals("https://at-work.pro", companyPage.compSite.getText());
-        Assert.assertEquals("от 1000 до 5000 человек", companyPage.compNumber.getText());
-        Assert.assertEquals("Тестовое описание", companyPage.compDescription.getText());
+        companyPage.checkCompany();
     }
     @Test
     public void test2_companyClear() {
         companyPage.clickCompContrib();
         companyPage.goToCompMenu();
         companyPage.goToCompEdit();
-        companyEditPage.nextPageCompany();
-
-        companyEditPage.shortDescriptionClear();
-        companyEditPage.siteClear();
-        companyEditPage.specializationChoose();
-        companyEditPage.numberClear();
-        companyEditPage.textAreaClear();
-        companyEditPage.nextPageAgain();
-        companyEditPage.submitCompany();
-
-
-
+        companyEditPage.clearCompany();
     }
     @AfterClass
     public static void tearDown() {

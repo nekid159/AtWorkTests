@@ -69,10 +69,7 @@ public class FilesTest {
     @Test
     public void Test1_CreateOffer() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        loginPage.inputLogin(ConfProperties.getProperty("login"));
-        loginPage.clickLoginBtn();
-        loginPage.inputPasswd(ConfProperties.getProperty("password"));
-        loginPage.clickEnterBtn();
+        loginPage.mailEnter();
         profilePage.moveToMenu();
         profilePage.changeToCompany();
         driver.get("https://at-work.pro/user/employer/archive/");

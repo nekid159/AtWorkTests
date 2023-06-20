@@ -1,4 +1,5 @@
 package org.example.Pages.Company;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -52,6 +53,12 @@ public class CompanyPage {
     public void gettingNumber() {
       List<WebElement> elements = driver.findElements(By.className("company-about__start-info-desc"));
       compNumber = elements.get(2);
+    }
+    public void checkCompany() {
+        Assert.assertEquals("Автомобильный бизнес", compSpec.getText());
+        Assert.assertEquals("https://at-work.pro", compSite.getText());
+        Assert.assertEquals("от 1000 до 5000 человек", compNumber.getText());
+        Assert.assertEquals("Тестовое описание", compDescription.getText());
     }
 
 }

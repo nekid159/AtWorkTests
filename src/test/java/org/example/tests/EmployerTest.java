@@ -46,10 +46,7 @@ public class EmployerTest {
 
     @Test
     public void test1_FiltersSetCity() {
-        loginPage.inputLogin(ConfProperties.getProperty("login"));
-        loginPage.clickLoginBtn();
-        loginPage.inputPasswd(ConfProperties.getProperty("password"));
-        loginPage.clickEnterBtn();
+        loginPage.mailEnter();
         profilePage.moveToMenu();
         profilePage.changeToCompany2();
         profilePage.setCityMoscowInHeader();

@@ -1,4 +1,5 @@
 package org.example.Pages;
+import org.example.ConfProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,11 +28,11 @@ public class LoginPage {
         loginBtn.click(); }
     public void clickEnterBtn() {
         enterBtn.click(); }
-    public void logIn() {
-        loginField.sendKeys("nekid159@yandex.ru");
-        passwdField.sendKeys("Dd17549dd!");
-        loginBtn.click();
-        enterBtn.click();
+    public void mailEnter() {
+        inputLogin(ConfProperties.getProperty("login"));
+        clickLoginBtn();
+        inputPasswd(ConfProperties.getProperty("password"));
+        clickEnterBtn();
     }
 }
 

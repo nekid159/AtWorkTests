@@ -53,10 +53,7 @@ public class VacancyTest {
 
     @Test
     public void test1_VacancyCreate() {
-        loginPage.inputLogin(ConfProperties.getProperty("login"));
-        loginPage.clickLoginBtn();
-        loginPage.inputPasswd(ConfProperties.getProperty("password"));
-        loginPage.clickEnterBtn();
+        loginPage.mailEnter();
         profilePage.moveToMenu();
         profilePage.changeToCompany();
         driver.get("https://at-work.pro/user/employer/vacancies/my_vacancies/#active");

@@ -1,4 +1,5 @@
 package org.example.Pages.Company;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -64,7 +65,6 @@ public class CompanyEditPage {
         peopleNumber.click();
         peopleNumber1.click();
     }
-
     public void textAreaEdit(){
         textArea.sendKeys("Тестовое описание");
     }
@@ -77,5 +77,26 @@ public class CompanyEditPage {
     public void submitCompany(){
         submitBtn.click();
     }
+    public void editCompany() {
+        nextPageCompany();
+        descriptionEdit();
+        siteEdit();
+        specializationChoose();
+        numberChoose();
+        textAreaEdit();
+        nextPageAgain();
+        submitCompany();
+    }
+    public void clearCompany() {
+        nextPageCompany();
+        shortDescriptionClear();
+        siteClear();
+        specializationChoose();
+        numberClear();
+        textAreaClear();
+        nextPageAgain();
+        submitCompany();
+    }
+
 
 }
