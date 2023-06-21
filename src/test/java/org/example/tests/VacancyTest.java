@@ -45,7 +45,6 @@ public class VacancyTest {
         vacancyCreatePage = new VacancyCreatePage(driver);
         archieveVacancyPage = new ArchieveVacancyPage(driver);
 
-
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage"));
