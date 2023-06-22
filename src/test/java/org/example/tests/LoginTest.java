@@ -28,14 +28,24 @@ public class LoginTest {
         driver.get(ConfProperties.getProperty("loginpage")); }
 
     @Test
-    public void loginTest() {
+    public void Test1_mailEnter() {
         loginPage.mailEnter();
         profilePage.moveToMenu();
         String user = profilePage.getUserID();
         Assert.assertEquals("ID: 976261", user);
+        profilePage.userLogout();
         }
+
+    @Test
+    public void Test2_phoneEnter() {
+        driver.get(ConfProperties.getProperty("loginpage"));
+        loginPage.phoneEnter();
+        profilePage.moveToMenu();
+        String user = profilePage.getUserID();
+        Assert.assertEquals("ID: 976261", user);
+    }
 
    @AfterClass
     public static void tearDown() {
-        profilePage.userLogout();
+       profilePage.userLogout();
        driver.quit(); } }

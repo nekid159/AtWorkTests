@@ -18,9 +18,17 @@ public class LoginPage {
     private WebElement enterBtn;
     @FindBy(xpath = "//input[@id=\"auth-password\"]")
     private WebElement passwdField;
+    @FindBy(xpath = "//button[@id=\"email-authorization\"]")
+    private WebElement mailChoose;
+    @FindBy(xpath = "//button[@id=\"phone-authorization\"]")
+    private WebElement phoneChoose;
+    @FindBy(xpath = "//input[@id=\"phone-input\"]")
+    private WebElement phoneField;
 
     public void inputLogin(String login) {
         loginField.sendKeys("nekid159@yandex.ru"); }
+    public void inputPhone(String phone) {
+        phoneField.sendKeys("9191640883"); }
 
     public void inputPasswd(String passwd) {
         passwdField.sendKeys("Dd17549dd!"); }
@@ -30,6 +38,19 @@ public class LoginPage {
         enterBtn.click(); }
     public void mailEnter() {
         inputLogin(ConfProperties.getProperty("login"));
+        clickLoginBtn();
+        inputPasswd(ConfProperties.getProperty("password"));
+        clickEnterBtn();
+    }
+    public void phoneEnter() {
+        phoneChoose.click();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        phoneField.click();
+        inputPhone(ConfProperties.getProperty("phone"));
         clickLoginBtn();
         inputPasswd(ConfProperties.getProperty("password"));
         clickEnterBtn();
