@@ -1,5 +1,4 @@
 package org.example.tests;
-import com.beust.ah.A;
 import org.example.ConfProperties;
 import org.example.Pages.*;
 import org.example.Pages.Company.CompanyEditPage;
@@ -12,10 +11,7 @@ import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
-
 import org.junit.runners.MethodSorters;
-
-
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
