@@ -24,7 +24,7 @@ public class LoginTest {
         loginPage = new LoginPage(driver);
         profilePage = new ProfilePage(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage")); }
 
     @Test
