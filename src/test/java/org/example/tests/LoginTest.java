@@ -24,25 +24,27 @@ public class LoginTest {
         loginPage = new LoginPage(driver);
         profilePage = new ProfilePage(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(ConfProperties.getProperty("loginpage")); }
 
     @Test
-    public void Test1_mailEnter() {
+    public void Test1_mailEnter() throws InterruptedException {
         loginPage.mailEnter();
         profilePage.moveToMenu();
+        Thread.sleep(100);
         String user = profilePage.getUserID();
-        Assert.assertEquals("ID: 976261", user);
+        Assert.assertEquals("ID 11", user);
         profilePage.userLogout();
         }
 
     @Test
-    public void Test2_phoneEnter() {
+    public void Test2_phoneEnter() throws InterruptedException {
+        Thread.sleep(500);
         driver.get(ConfProperties.getProperty("loginpage"));
         loginPage.phoneEnter();
         profilePage.moveToMenu();
         String user = profilePage.getUserID();
-        Assert.assertEquals("ID: 976261", user);
+        Assert.assertEquals("ID 11", user);
     }
 
    @AfterClass

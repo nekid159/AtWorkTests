@@ -11,11 +11,11 @@ public class ProfilePage {
         PageFactory.initElements(driver, this);
         this.driver = driver; }
 
-    @FindBy(xpath = "//a[contains(@class, 'upper-case__profile-user')]")
+    @FindBy(xpath = "//div[contains(@data-test, 'profile-menu')]")
     private WebElement upperMenu;
-    @FindBy(xpath = "//p[contains(@class, 'upper-case__profile-id')]")
-    private WebElement profID;
-    @FindBy(id = "profile-logout")
+    @FindBy(xpath = "//p[contains(@data-test, 'user-id')]")
+    public WebElement profID;
+    @FindBy(xpath = "//p[contains(@data-test, 'logout')]")
     private WebElement logoutBtn ;
 
     @FindBy(css = "[data-id='2200699']")

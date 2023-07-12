@@ -10,35 +10,33 @@ public class LoginPage {
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver; }
-    @FindBy(xpath = "//input[@id=\"email-input\"]")
-    private WebElement loginField;
-    @FindBy(xpath = "//button[contains(@class, 'authorization__button--continue')]")
-    private WebElement loginBtn;
-    @FindBy(xpath = "//button[contains(@class, 'authorization__button--enter')]")
-    private WebElement enterBtn;
-    @FindBy(xpath = "//input[@id=\"auth-password\"]")
-    private WebElement passwdField;
-    @FindBy(xpath = "//button[@id=\"email-authorization\"]")
+    @FindBy(xpath = "//button[contains(@data-test, 'email-choose')]")
     private WebElement mailChoose;
-    @FindBy(xpath = "//button[@id=\"phone-authorization\"]")
+    @FindBy(xpath = "//button[contains(@data-test, 'phone-choose')]")
     private WebElement phoneChoose;
-    @FindBy(xpath = "//input[@id=\"phone-input\"]")
+    @FindBy(xpath = "//input[@id=\"email\"]")
+    private WebElement loginField;
+    @FindBy(xpath = "//input[@id=\"phone\"]")
     private WebElement phoneField;
+    @FindBy(xpath = "//input[@id=\"password\"]")
+    private WebElement passwdField;
+    @FindBy(xpath = "//button[contains(@data-test, 'enter')]")
+    private WebElement enterBtn;
+
+
 
     public void inputLogin(String login) {
-        loginField.sendKeys("nekid159@yandex.ru"); }
+        loginField.sendKeys("test@at-work.pro"); }
     public void inputPhone(String phone) {
-        phoneField.sendKeys("9191640883"); }
+        phoneField.sendKeys("9817569728"); }
 
     public void inputPasswd(String passwd) {
-        passwdField.sendKeys("Dd17549dd!"); }
-    public void clickLoginBtn() {
-        loginBtn.click(); }
+        passwdField.sendKeys("AtW0rk##"); }
+
     public void clickEnterBtn() {
         enterBtn.click(); }
     public void mailEnter() {
         inputLogin(ConfProperties.getProperty("login"));
-        clickLoginBtn();
         inputPasswd(ConfProperties.getProperty("password"));
         clickEnterBtn();
     }
@@ -51,7 +49,6 @@ public class LoginPage {
         }
         phoneField.click();
         inputPhone(ConfProperties.getProperty("phone"));
-        clickLoginBtn();
         inputPasswd(ConfProperties.getProperty("password"));
         clickEnterBtn();
     }
